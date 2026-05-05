@@ -2,8 +2,11 @@ pipeline {
     agent any
 
     triggers {
-
         cron('H 2 * * *')
+    }
+
+    tools {
+        maven 'Maven-3'
     }
 
     stages {
@@ -13,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                echo 'Running build step'
+                echo 'Running Maven build'
                 bat 'mvn clean test'
             }
         }
